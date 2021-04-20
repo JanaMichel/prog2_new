@@ -15,6 +15,12 @@ public class Meldung
 		//Aufruf der statischen Methode showInputDialog()
 		String eingabe = JOptionPane.showInputDialog(null, "Geben Sie Ihren Namen ein", "Eine Eingabeaufforderung", JOptionPane.PLAIN_MESSAGE);
 		System.out.println(eingabe);
+		
+		//Aufruf der statischen Methode showMessageDialog()
+		JOptionPane.showMessageDialog(null, "Haben Sie noch einen schönen Tag", "Abschied", JOptionPane.WARNING_MESSAGE);
+		
+		
+		
 		System.exit(0);
 				
 		
