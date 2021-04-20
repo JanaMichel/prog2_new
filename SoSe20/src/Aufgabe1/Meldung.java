@@ -25,7 +25,7 @@ public class Meldung
 			int selected = JOptionPane.showOptionDialog(null, "Bester Studiengang?","Auswahl",
 					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.WARNING_MESSAGE, null, 
-			new String[]{"FIW", "AI", "WIKO"}, "A");			
+			new String[]{"FIW", "AI", "beide"}, "A");			
 			if(selected==0)
 			{
 				System.out.println("FIW");
@@ -36,7 +36,7 @@ public class Meldung
 			}
 			if(selected==2)
 			{
-				System.out.println("WIKO");
+				System.out.println("beide");
 			}
 			
 		
