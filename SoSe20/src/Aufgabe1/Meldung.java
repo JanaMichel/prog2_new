@@ -20,12 +20,11 @@ public class Meldung
 		JOptionPane.showMessageDialog(null, "Haben Sie noch einen schönen Tag", "Abschied", JOptionPane.WARNING_MESSAGE);
 		
 		//Aufruf der statischen showOptionDialog()
-		Object[] options = {"FIW", "AI", "IMI", "WI", "Alle"};
-			
-			int selected = JOptionPane.showOptionDialog(null, "Bester Studiengang?","Auswahl",
-					JOptionPane.YES_NO_CANCEL_OPTION,
-					JOptionPane.WARNING_MESSAGE, null, 
-			new String[]{"FIW", "AI", "beide"}, "A");			
+		int selected = JOptionPane.showOptionDialog(null, "Bester Studiengang?","Auswahl",
+		JOptionPane.YES_NO_CANCEL_OPTION,
+		JOptionPane.WARNING_MESSAGE, null, 
+		
+		new String[]{"FIW", "AI", "beide"}, "A");			
 			if(selected==0)
 			{
 				System.out.println("FIW");
