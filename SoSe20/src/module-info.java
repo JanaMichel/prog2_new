@@ -1,2 +1,4 @@
-module SoSe20 {
+module SoSe20 
+{
+	requires java.desktop;
 }
