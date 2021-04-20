@@ -22,9 +22,10 @@ public class Meldung
 		//Aufruf der statischen showOptionDialog()
 		Object[] options = {"FIW", "AI", "IMI", "WI", "Alle"};
 			
-			int selected = JOptionPane.showOptionDialog(null, "Bester Studiengang?", "Auswahl", 
-					JOptionPane.DEFAULT_OPTION, 
-					JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+			int selected = JOptionPane.showOptionDialog(null, "Bester Studiengang?","Auswahl",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.WARNING_MESSAGE, null, 
+			new String[]{"FIW", "AI", "WIKO"}, "A");			
 			if(selected==0)
 			{
 				System.out.println("FIW");
@@ -35,18 +36,9 @@ public class Meldung
 			}
 			if(selected==2)
 			{
-				System.out.println("IMI");
+				System.out.println("WIKO");
 			}
-			if(selected==3)
-			{
-				System.out.println("WI");
-				
-			}
-			else
-			{
-				System.out.println("alle");
-				
-			}
+			
 		
 		System.exit(0);
 				
