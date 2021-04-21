@@ -57,14 +57,14 @@ public class ArraysUndEnums {
 		{
 			for (int j = 0; j < mdIntArray[i].length; j++) 
 			{
-				mdIntArray[i][j] = i * j;
+				mdIntArray[i][j] = i + j;
 				
 			}
 		}
 		
 		for (int i = 0; i < mdIntArray.length; i++) 
 		{
-			System.out.print(i + ": ");
+			//System.out.print(i + ": ");
 			for (int j = 0; j < mdIntArray[i].length; j++) 
 			{
 				System.out.print(mdIntArray[i][j] + " ");
