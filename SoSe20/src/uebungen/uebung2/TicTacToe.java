@@ -39,13 +39,14 @@ public class TicTacToe
 				}
 				if(field[i][j]==State.BLACK)
 				{
-					System.out.println("o");
+					System.out.print("o");
 				}
 				else
 				{
-					System.out.println("-");
+					System.out.print("-");
 				}
 			}
+			System.out.println();
 		}
     	System.out.println();
 	}
@@ -81,7 +82,11 @@ public class TicTacToe
     
     public boolean unentschieden()
     {
-    	boolean gleichstand = false;
+    	boolean gleichstand = true;
+    	if(gewonnen())
+    	{
+    		gleichstand = false;
+    	}
     	return gleichstand;
     }
 	
