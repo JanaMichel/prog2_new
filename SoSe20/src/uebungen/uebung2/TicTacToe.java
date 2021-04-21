@@ -50,9 +50,41 @@ public class TicTacToe
     	System.out.println();
 	}
     
-    public static void main(String[] args)
+    public boolean gewonnen()
     {
-    	 
+    	boolean gewonnen = false;
+    	for (int i = 0; i < field.length; i++) 
+    	{
+			for (int j = 0; j < field[i].length; j++) 
+			{
+				if(field[i][j] == State.RED && field[i][j+1] == State.RED && field[i][j+2]==State.RED)
+				{
+					gewonnen = true;
+				}
+				if(field[i][j] == State.RED && field[i+1][j] == State.RED && field[i+1][j]==State.RED)
+				{
+					gewonnen = true;
+				}
+				if(field[i][j] == State.BLACK && field[i][j+1] == State.BLACK && field[i][j+2]==State.BLACK)
+				{
+					gewonnen = true;
+				}
+				if(field[i][j] == State.BLACK && field[i+1][j] == State.BLACK && field[i+1][j]==State.BLACK)
+				{
+					gewonnen = true;
+				}
+				
+			}
+		}
+    	return gewonnen;
+    }
+    
+    public boolean unentschieden()
+    {
+    	boolean gleichstand = false;
+    	return gleichstand;
     }
 	
+    
+    
 }
