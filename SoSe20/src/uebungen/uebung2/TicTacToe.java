@@ -41,7 +41,7 @@ public class TicTacToe
 				{
 					System.out.print("o");
 				}
-				else
+				if(field[i][j]==State.EMPTY)
 				{
 					System.out.print("-");
 				}
