@@ -33,18 +33,22 @@ public class TicTacToe
     	{
 			for (int j = 0; j < field[i].length; j++) 
 			{
-				if(field[i][j]==State.RED)
-				{
-					System.out.print("x");
-				}
-				if(field[i][j]==State.BLACK)
-				{
-					System.out.print("o");
-				}
 				if(field[i][j]==State.EMPTY)
 				{
 					System.out.print("-");
 				}
+				else
+				{
+					if(field[i][j]==State.RED)
+					{
+						System.out.print("x");
+					}
+					if(field[i][j]==State.BLACK)
+					{
+						System.out.print("o");
+					}
+				}
+				
 			}
 			System.out.println();
 		}
@@ -53,41 +57,55 @@ public class TicTacToe
     
     public boolean gewonnen()
     {
-    	boolean gewonnen = false;
     	for (int i = 0; i < field.length; i++) 
     	{
-			for (int j = 0; j < field[i].length; j++) 
+			if(field[i][0] == field[i][1] 
+			&& field[i][1] == field[i][2] 
+			&& field[i][0]!= State.EMPTY)
 			{
-				if(field[i][j] == State.RED && field[i][j+1] == State.RED && field[i][j+2]==State.RED)
-				{
-					gewonnen = true;
-				}
-				if(field[i][j] == State.RED && field[i+1][j] == State.RED && field[i+1][j]==State.RED)
-				{
-					gewonnen = true;
-				}
-				if(field[i][j] == State.BLACK && field[i][j+1] == State.BLACK && field[i][j+2]==State.BLACK)
-				{
-					gewonnen = true;
-				}
-				if(field[i][j] == State.BLACK && field[i+1][j] == State.BLACK && field[i+1][j]==State.BLACK)
-				{
-					gewonnen = true;
-				}
-				
+					return true;
+			}
+			if(field[0][i] == field[1][i] 
+			&& field[1][i] == field[2][i] 
+			&& field[0][i]!= State.EMPTY)
+			{
+				return true;
+			}
+			if(field[1][1] == field[0][0] 
+			&& field[0][0] == field[2][2] 
+			&& field[1][1]!= State.EMPTY)
+			{
+				return true;
+			}
+			if(field[0][2] == field[1][1] 
+			&& field[0][0] == field[2][0] 
+			&& field[1][1]!= State.EMPTY)
+			{
+				return true;
 			}
 		}
-    	return gewonnen;
+    	return false;
     }
     
     public boolean unentschieden()
     {
-    	boolean gleichstand = true;
-    	if(gewonnen())
+    	for (int i = 0; i < field.length; i++) 
     	{
-    		gleichstand = false;
+			for (int j = 0; j < field.length; j++) 
+			if(field[i][j] == State.EMPTY)
+			{
+				return false;
+			}
+		}
+    	
+    	if(!gewonnen())
+    	{
+    		return true;
     	}
-    	return gleichstand;
+    	else
+    	{
+    		return false;
+    	}
     }
 	
     

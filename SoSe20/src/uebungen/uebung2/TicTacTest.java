@@ -19,7 +19,8 @@ public class TicTacTest {
 		a1.print();
 		a1.makeMove(2, 2, State.RED);
 		a1.print();
-		//a1.gewonnen();
+		a1.gewonnen();
+		a1.unentschieden();
 		
 		
 	}
