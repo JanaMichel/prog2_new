@@ -1,27 +1,46 @@
 package uebungen.uebung2;
 
-import uebungen.uebung2.TicTacToe.State;
-
 public class TicTacTest {
 
 	public static void main(String[] args) 
 	{
-		TicTacToe a1 = new TicTacToe();
-		a1.makeMove(1, 1, State.BLACK);
-		a1.print();
-		a1.makeMove(1, 2, State.RED);
-		a1.print();
-		a1.makeMove(0, 0, State.BLACK);
-		a1.print();
-		a1.makeMove(0, 2, State.RED);
-		a1.print();
-		a1.makeMove(2, 0, State.BLACK);
-		a1.print();
-		a1.makeMove(2, 2, State.RED);
-		a1.print();
-		a1.gewonnen();
-		a1.unentschieden();
-		
+		TicTacToe ttt = new TicTacToe();
+        ttt.print();
+        /*
+        ttt.makeMove(1, 1, State.RED);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(1, 2, State.BLACK);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(1, -1, State.BLACK);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(0, 1, State.RED);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(2, 1, State.BLACK);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(1, 0, State.RED);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(0, 0, State.BLACK);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(0, 2, State.RED);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(2, 0, State.BLACK);
+        ttt.printResultat();
+        ttt.print();
+        ttt.makeMove(2, 2, State.RED);
+        ttt.printResultat();
+        ttt.print();
+        */
+        ttt.spielen();
+        // ttt.makeRandomMove(State.RED);
+        // ttt.print();
 		
 	}
 
