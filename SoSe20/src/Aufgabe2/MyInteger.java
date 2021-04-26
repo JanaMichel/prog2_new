@@ -65,4 +65,9 @@ public class MyInteger
 	{
 		return new MyInteger(value);
 	}*/
+	
+	/*public static string valueOf(int value)
+	{
+		return new MyInteger(value);
+	}*/
 }
