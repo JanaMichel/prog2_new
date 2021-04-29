@@ -63,7 +63,9 @@ public class MyInteger
 	
 	/*public static int valueOf(int value)
 	{
-		return new MyInteger(value);
+		int a1 = value;
+		int test = a1.MyInteger();
+		return test;
 	}*/
 	
 	/*public static string valueOf(int value)
