@@ -6,153 +6,110 @@ import javax.swing.JOptionPane;
 
 public class Uebung3 {
 
-	
-	
 	//Eingabe zahl1 - ist zahl?
-	
 	//catch keine zahl
-	
 	//Eingabe zahl2 - ist zahl? ist 0 ?
 	//catch division durch null
 	//catch keine zahl
-	Uebung3()
-	{
-		int zahl1 = 0;
-		int zahl2 = 0;
-		boolean inputOk = false;
-		String input = "";
-		String promt1 = "Zahl1";
-		String promt2 = "Zahl2";
-	
-		while(!inputOk)
-		{
-			try
-			{
-				input = JOptionPane.showInputDialog(promt1);
-				inputOk = true;
-				zahl1 = Integer.parseInt(input);
-			}
-			catch(NumberFormatException e)
-			{
-				promt1 = "Die Eingabe muss eine Zahl sein:";
-				inputOk = false;
-			}
-		}
-		
-		
-		while(!inputOk)
-		{
-			try
-			{
-				input = JOptionPane.showInputDialog(promt1);
-				inputOk = true;
-				zahl2= Integer.parseInt(input);
-				JOptionPane.showMessageDialog(null,  "Das Ergebnis ist " + zahl1/zahl2, "Ergebnis", JOptionPane.PLAIN_MESSAGE);
-			}
-			catch(NumberFormatException e)
-			{
-				promt2 = "Die Eingabe muss eine Zahl sein:";
-				inputOk = false;
-			}
-			catch(ArithmeticException e)
-			{
-				promt2 = "Die Eingabe darf keine 0 sein:";
-				inputOk = false;
-			}
-		}
-		
-	}
-	
-	public int inputInt(int min, int max)
-	{
-		int zahl = 0;
-		boolean inputOk = false;
-		String input = "";
-		String promt1 = "Zahl zwischen" + min + "und" + max + ":";
-		while(!inputOk)
-		{
-			try
-			{
-				input = JOptionPane.showInputDialog(promt1);
-				zahl = Integer.parseInt(input);
-				if(zahl >= min && zahl <= max)
-				{
-					inputOk = true;
-					return(zahl);
-				}
-				else
-				{
-					promt1 = "Die Zahl muss zwischen" + min + "und" + max + "sein";
-					inputOk = false;
-				}
-			}
-			catch(NumberFormatException e)
-			{
-				promt1 = "Die Eingabe muss eine Zahl sein. Bitte geben Sie eine Zahl zwischen" + min + "und" + "max" + "sein";
-				inputOk = false;
-			}
-		}
-		
-		//muss zahl sein
-		//muss zwischen min und max sein
-		return zahl;
-	}
-	
-	public static int inputInt()
-	{
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Geben Sie hier eine Zahl ein: ");
-		int zahl = scan.nextInt();
-		return zahl;
-	}
-	
-	public static void printUmrechnungSek()
-	{
-		int sekunden = inputInt();
-		int tage = sekunden/(24*60*60);
-		int stunden = sekunden/(60*60) - (tage*24);
-		int minuten = sekunden/(60) - (tage*24*60) - (stunden*60);
-		int sek = sekunden - (tage*24*60*60) - (stunden*60*60) - (minuten*60);
-		
-		//Sekunden einlesen
-		
-		String s = sekunden + "Sekunden sind: ";
-		if(tage>1)
-		{
-			s+= tage + "Tage, ";
-		}
-		if(stunden>1)
-		{
-			s+= stunden + "Stunden, ";
-		}
-		if(minuten>1)
-		{
-			s+= minuten + "Minuten, ";
-		}
-		if(sek>1)
-		{
-			s+= tage + "Tage, ";
-		}
-		System.out.println(s);
-	
-		//testen zahl ok?
-		//wie viele tage
-		//sekunden = sekunden - (verrechnet mit Tagen)
-		//wie viele stunden 
-		//Sekunden = sekunden - (verrechnet mit stunden)
-	}
-	
-	public static void main(String[] args) 
-	{
-		// TODO Auto-generated method stub
-		Uebung3 test = new Uebung3();
-		int zahl = test.inputInt(2, 10);
-		System.out.println(zahl);
-		System.out.printf("%n%n--------------------Aufgabe 1 ----------------%n%n");
-		int prim = inputInt();
-		System.out.println(prim);
-		System.out.println();
+	public static int inputInt(int min, int max, String message)
+    {
+        boolean eingabeOk = false;
+        int zahl = 0;
+        // String message = "Geben Sie eine Zahl ein : ";
+        while(!eingabeOk)
+        {
+            String eingabe1 = JOptionPane.showInputDialog(message);
 
-	}
+            try {
+                zahl = Integer.valueOf(eingabe1);
+                if(zahl>=min && zahl<=max)
+                {
+                    eingabeOk = true;
+                }
+                else
+                {
+                    message = "Zahl muss zwischen " + min + " und " + max + " liegen!";
+                }
+            } 
+            catch (NumberFormatException e) 
+            {
+                message = "Eingabe war keine Zahl! Bitte Zahl eingeben";
+            }
+        }
+        return zahl;
+    }
+
+    public static int inputInt(String message)
+    {
+        return inputInt(Integer.MIN_VALUE,Integer.MAX_VALUE, message);
+    }
+
+    public static int division(int divident, int divisor) throws ArithmeticException
+    {
+        int quotient = divident / divisor;
+        return quotient;
+    }
+
+    public static void printDivision()
+    {
+        int zahl1 = inputInt("Geben Sie eine Zahl1 ein : ");
+        boolean zahl2NotZero = false;
+        String message = "Geben Sie eine Zahl2 ein : ";
+        while(!zahl2NotZero)
+        {
+            int zahl2 = inputInt(message);
+            int result = 0;
+            try {
+                result = division(zahl1, zahl2);
+                zahl2NotZero = true;
+            } catch (ArithmeticException e) {
+                message = "Zahl2 darf nicht 0 sein!";
+            }
+            System.out.println(zahl1 + " / " + zahl2 + " = " + result);
+        }
+    }
+
+    public static int quersumme(int zahl)
+    {
+        int ganz = zahl;
+        int quersumme = 0;
+        while(ganz>0)
+        {
+            int rest = ganz % 10;
+            quersumme += rest;
+            ganz = ganz / 10;
+        }
+        return quersumme;
+    }
+
+    public static void printUmrechnungSek()
+    {
+        int sek = inputInt("Anzahl Sekunden : ");
+        int tage     = sek/(24*60*60);
+        int stunden  = sek/(60*60)  - (tage*24);
+        int minuten  = sek/(60)     - (tage*24*60)      - (stunden*60);
+        int sekunden = sek          - (tage*24*60*60)   - (stunden*60*60) - (minuten*60);
+
+        String s = sek + " Sekunden sind ";
+        if(tage>1)  s += tage +" Tage, ";
+        else if(tage==1) s+= "1 Tag, ";
+        if(stunden>1) s += stunden +" Stunden, ";
+        else if(stunden==1) s += "1 Stunden, ";
+        if(minuten>1) s += minuten + " Minuten, ";
+        else if(minuten==1) s += "1 Minute, ";
+        if(sekunden>1) s += sekunden +" Sekunden.";
+        else if(sekunden==1) s += "1 Sekunde.";
+        System.out.println(s);
+    }
+
+    public static void main(String[] args) 
+    {
+        printDivision();
+        int zahl = inputInt("Geben Sie eine Zahl ein");
+        // System.out.println("Quersumme von " + zahl + " ist " + quersumme(zahl));
+        JOptionPane.showMessageDialog(null, "Quersumme von " + zahl + " ist " + quersumme(zahl));
+
+        printUmrechnungSek();
+    }
 
 }
