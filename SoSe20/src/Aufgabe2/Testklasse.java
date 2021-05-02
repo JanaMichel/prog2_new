@@ -4,8 +4,9 @@ public class Testklasse {
 
 	public static void main(String[] args) 
 	{
-		MyInteger a1 = new MyInteger(5);
-		System.out.println(a1);
+		MyInteger a1 = new MyInteger("Geben Sie eine Zahl ein: ");
+		System.out.println("a1 = " + a1.intValue());
+		System.out.println(a1.toString());
 	}
 
 }
