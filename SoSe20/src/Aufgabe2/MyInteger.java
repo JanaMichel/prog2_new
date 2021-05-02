@@ -8,6 +8,26 @@ public class MyInteger
 	static int MAX_VALUE = Integer.MAX_VALUE; //2147483647
 	static int MIN_VALUE = Integer.MIN_VALUE; //-2147483648
 	
+	public static void printZahl(int zahl)
+	{
+		switch(zahl)
+		{
+			case 43 : System.out.print("+"); break;
+			case 45 : System.out.print("-"); break;
+			case 46 : System.out.print("."); break;
+			case 48 : System.out.print("0"); break;
+			case 49 : System.out.print("1"); break;
+			case 50 : System.out.print("2"); break;
+			case 51 : System.out.print("3"); break;
+			case 52 : System.out.print("4"); break;
+			case 53 : System.out.print("5"); break;
+			case 54 : System.out.print("6"); break;
+			case 55: System.out.print("7"); break;
+			case 56: System.out.print("8"); break;
+			case 57: System.out.print("9"); break;
+			default: System.out.print("Keine Zahl");
+		}
+	}
 	
 	//Konstruktoren
 	
@@ -42,7 +62,7 @@ public class MyInteger
 			int b = message.charAt(i);
 			if(b >=48 && b <= 57 || b == 45 || b == 46 || b == 43)
 			{
-				zahl = b;
+				printZahl(b);
 			}
 		}
 		return zahl;
