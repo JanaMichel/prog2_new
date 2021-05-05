@@ -48,7 +48,8 @@ public class Moves
 	    public void addMove(Move nextMove)
 	    {
 	        Move[] newMoves = new Move[this.moves.length + 1];
-	        for (int index = 0; index < this.moves.length; index++) {
+	        for (int index = 0; index < this.moves.length; index++) 
+	        {
 	            newMoves[index] = this.moves[index];
 	        }
 	        newMoves[newMoves.length - 1] = new Move(nextMove.getFrom(), nextMove.getTo());

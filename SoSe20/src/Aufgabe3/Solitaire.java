@@ -69,7 +69,14 @@ public class Solitaire
 	     */
 	    public boolean possibleFrom(int row, int col)
 	    {
-
+	    	if(this.field[row][col]==State.USED &&
+	    	((this.field[row][col+2]==State.FREE && this.field[row][col+1]==State.USED) 
+	    	|| (this.field[row][col-2]==State.FREE && this.field[row][col-1]==State.USED) 
+	    	|| (this.field[row+2][col]==State.FREE && this.field[row+1][col]==State.USED) 
+	    	|| this.field[row-2][col]==State.FREE && this.field[row-1][col]==State.USED))
+	    	{
+	    		return true;
+	    	}
 	        return false;
 	    }
 
@@ -109,7 +116,17 @@ public class Solitaire
 	     */
 	    public boolean movePossible()
 	    {
-
+	
+	    	for(int row = 0; row < this.field.length; row++)
+	        {
+	            for(int col = 0; col < this.field[row].length; col++)
+	            {
+	            	if(this.field[row][col]== State.FREE)
+	                {
+	                    return true;
+	                }
+	            }
+	        }
 	        return false;
 	    }
 
@@ -140,7 +157,7 @@ public class Solitaire
 	     */
 	    public void move(Move move) throws IllegalArgumentException
 	    {
-
+	    	
 	    }
 
 	
