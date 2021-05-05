@@ -141,6 +141,8 @@ public class ListenUndMengen {
 		{
 			System.out.println(element);
 		}
+		
+		//containsAll sind alle übergeben die ich löchen will
 	}
 
 }
