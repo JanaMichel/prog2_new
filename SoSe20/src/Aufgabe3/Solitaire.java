@@ -69,14 +69,14 @@ public class Solitaire
 	     */
 	    public boolean possibleFrom(int row, int col)
 	    {
-	    	if(this.field[row][col]==State.USED &&
-	    	((this.field[row][col+2]==State.FREE && row <5 && this.field[row][col+1]==State.USED) 
-	    	|| (this.field[row][col-2]==State.FREE && row >1 && this.field[row][col-1]==State.USED) 
-	    	|| (this.field[row+2][col]==State.FREE && col <5 && this.field[row+1][col]==State.USED) 
-	    	|| this.field[row-2][col]==State.FREE && col <1 && this.field[row-1][col]==State.USED))
+	    	if(row>=0 && row<7 && col>=0 && col<7 && this.field[row][col] == State.USED)
 	    	{
-	    		return true;
+	    		if(this.field[row][col+2]==State.FREE && col <5 && this.field[row][col+1]==State.USED) return true;
+		    	if(this.field[row][col-2]==State.FREE && col >1 && this.field[row][col-1]==State.USED) return true;
+		    	if(this.field[row+2][col]==State.FREE && row <5 && this.field[row+1][col]==State.USED) return true;
+		    	if(this.field[row-2][col]==State.FREE && row >1 && this.field[row-1][col]==State.USED) return true;
 	    	}
+	    	
 	        return false;
 	    }
 
@@ -88,11 +88,11 @@ public class Solitaire
 	    public Point[] possibleTo(int fromRow, int fromCol)
 	    {
 	        int PointsGesamt = 0;
-	    	if(!possibleFrom(fromRow, fromCol)) return new Point[0];
-	    	if((this.field[fromRow][fromCol+2]==State.FREE && fromRow <5 && this.field[fromRow][fromCol+1]==State.USED) 
-	    	  || (this.field[fromRow][fromCol-2]==State.FREE && fromRow >1 && this.field[fromRow][fromCol-1]==State.USED) 
-	    	  || (this.field[fromRow+2][fromCol]==State.FREE && fromCol <5 && this.field[fromRow+1][fromCol]==State.USED) 
-	    	  || (this.field[fromRow-2][fromCol]==State.FREE && fromCol >1 && this.field[fromRow-1][fromCol]==State.USED))
+	    	if(!possibleFrom(fromRow, fromCol)) return new Point[PointsGesamt];
+	    	if((this.field[fromRow][fromCol+2]==State.FREE && fromCol <5 && this.field[fromRow][fromCol+1]==State.USED) 
+	    	  || (this.field[fromRow][fromCol-2]==State.FREE && fromCol >1 && this.field[fromRow][fromCol-1]==State.USED) 
+	    	  || (this.field[fromRow+2][fromCol]==State.FREE && fromRow <5 && this.field[fromRow+1][fromCol]==State.USED) 
+	    	  || (this.field[fromRow-2][fromCol]==State.FREE && fromRow >1 && this.field[fromRow-1][fromCol]==State.USED))
 	    	  {
 	    		  PointsGesamt++; //Anzahl/Länge des Punkte-Array festlegen
 	    	  }
@@ -120,13 +120,24 @@ public class Solitaire
 	     */
 	    public Moves possibleMoves()
 	    {
-	        Moves possibleMoves = new Moves();
-
-	        
-	        //points
-	        //possibleTo
-	        //move move = new Move
-	        //possibleMoves.addMove(move);
+	        Moves possibleMoves = new Moves(); //ein neues Moves-Objekt wird erstellt
+	        for (int row = 0; row < this.field.length; row++) 
+	        {
+				for (int col = 0; col < field.length; col++) 
+				{
+					if(possibleFrom(row, col)) //wenn eine mögliche form gefunden
+					{
+						Point from = new Point(row, col); //erstelle einen neuen Punkt
+						Point [] pM = this.possibleTo(row, col); //erstelle Punkt array, mit möglichen Zug
+						for (int index = 0; index < pM.length; index++) //erhöhe index solange index < pm.length
+						{
+							Move move = new Move(from, pM[index]); //erzeuge einen neuen move von punkt(from), zu punkt array (possible)
+							possibleMoves.addMove(move); //füge diesen Zug hinzu
+						}
+					}
+						
+				}
+	        }
 	        return possibleMoves;
 	    }
 
@@ -137,7 +148,16 @@ public class Solitaire
 	     */
 	    public boolean movePossible()
 	    {
-	    	//possiblefrom
+	    	for (int row = 0; row < this.field.length; row++) 
+	    	{
+				for (int col = 0; col < this.field.length; col++) 
+				{
+					if(possibleFrom(row, col)) //wenn von der aktuellen Position ein Zug möglich
+					{							//dann gib true zurück
+						return true;
+					}
+				}
+			}
 			return false;
 
 	    }
@@ -155,10 +175,17 @@ public class Solitaire
 	         *  den ersten, den Sie finden (siehe
 	         *  possibleMoves() )
 	         */
-	      //possible.Moves()
+	        else
+	        {
+	        	Moves possible = possibleMoves(); //neue Variable moves, die alle möglichen Züge enthält
+	        	possible.printMoves(); //alle möglichen züge werden gedruckt
+	        	Move move = possible.getMoveAtIndex(0); //der Zug an index 0 wird ermittelt
+	        	move(move); // der erste zug wird ausgeführt
+	        	return true;
+	        }
+	        //possibleMoves();
 	        //printMoves();
 	        //.getMoveAtIndex(0)
-	        return true;
 	    }
 
 	    /*
@@ -173,7 +200,26 @@ public class Solitaire
 	     */
 	    public void move(Move move) throws IllegalArgumentException
 	    {
+	    	//Methoden von move: 
+	    	//Move(int fromRow, int fromCol, int toRow, int toCol)
+	    	//Move(Point from, Point to)
+	    	//Point getFrom()
+	    	//Point getTo()
+	    	
 	    	//.getFrom,.getRow,getCol
+	    	int middleRow = (move.getFrom().getRow() + move.getTo().getRow()) / 2;
+			int middleCol = ( move.getFrom().getCol() + move.getTo().getCol()) / 2;
+			try {
+				this.field[move.getFrom().getRow()][move.getFrom().getCol()] = State.FREE;
+				this.field[middleRow][middleCol] = State.FREE;
+				this.field[move.getTo().getRow()][move.getTo().getCol()] = State.USED;	
+			}
+			catch(ArrayIndexOutOfBoundsException e)
+			{
+				throw new IllegalArgumentException("Move is not possible(" + move.getFrom().getRow() + ", " + move.getFrom().getCol() + ") --> "
+						+ "( " + move.getTo().getRow() + ", " + move.getTo().getCol() + ") ");
+			}
+
 	    }
 
 	
