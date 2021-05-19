@@ -15,11 +15,6 @@ public class SingleNumber
 	    return found;
 	}
 	
-	//größe herausfinden
-	//neue größe = x2 -1 (numbs)
-	//alles kopieren bis numbs
-	//index von numbs überspringen
-	//rest kopieren solange nicht numbs
 	public static boolean einmalig(int[] numbs, int element)
 	{
 		boolean einmalig = true;
