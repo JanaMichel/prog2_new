@@ -90,7 +90,7 @@ public class Maps {
 		}
 		mapA.put("E", 1);
 		
-		System.out.printf("%n%n------------------Map A ---------------%n%n");
+		System.out.printf("%n%n------------------All Values von MapA ---------------%n%n");
 		
 		Collection <Integer>allValues = mapA.values();
 		for(Integer value : allValues)
