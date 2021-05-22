@@ -37,20 +37,35 @@ public class SetOperations
 		}
 		
 	}
-	
+	/*
+	 * Erstellen Sie eine Objektmethode fillBothUnion(). 
+	 * In dieser Methode wird die both-Menge derart befüllt, dass both einer Vereinigung der Mengen numbers1 und numbers2 entspricht.
+	 */
 	public void fillBothUnion()
 	{
 		this.both.addAll(number1);
 		this.both.addAll(number2);
 	}
-	//add All(collection<? extends E> c)
-	
 	
 	//fillBothIntersection
 	//boolean contains(element e)
 	//if contains(0)
 	//set.add(0);
 	//else ++
+	
+	public void fillBothIntersection()
+	{
+		this.both.clear(); //inhalt von both löschen
+		for (int i = 0; i < 100; i++) 
+		{
+			if(this.number1.contains(i) && this.number2.contains(i))
+			{
+				this.both.add(Integer.valueOf(i));
+			}
+		}
+		
+	}
+	
 	
 	/*
 	 * fillBothDifference
@@ -59,6 +74,12 @@ public class SetOperations
 	 * else
 	 * remove element
 	 */
+	
+	public void fillBothDifference()
+	{
+		this.both.addAll(number1);
+		this.both.removeAll(number2);
+	}
 	
 	public void print()
 	{
@@ -71,11 +92,11 @@ public class SetOperations
 			{
 				if(this.number1.contains(Integer.valueOf(numberEins)))
 				{
-					System.out.print(" " + '\u25cf');
+					System.out.print(" " + "o");
 				}
 				else
 				{
-					System.out.print(" " + '\u2009');
+					System.out.print(" " +  " ");
 				}
 				numberEins++;
 			}
@@ -89,11 +110,11 @@ public class SetOperations
 			{
 				if(this.number2.contains(Integer.valueOf(numberZwei)))
 				{
-					System.out.print(" " + '\u25cf');
+					System.out.print(" " + "o");
 				}
 				else
-				{
-					System.out.print(" " + '\u2009');
+				{ 
+					System.out.print(" " + " ");
 				}
 				numberZwei++;
 			}
@@ -107,11 +128,11 @@ public class SetOperations
 			{
 				if(this.both.contains(Integer.valueOf(numberBoth)))
 				{
-					System.out.print(" " + '\u25cf');
+					System.out.print(" " + "o");
 				}
 				else
 				{
-					System.out.print(" " + '\u2009');
+					System.out.print(" " + " ");
 				}
 				numberBoth++;
 			}
