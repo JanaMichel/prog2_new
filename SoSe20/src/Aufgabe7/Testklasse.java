@@ -1,7 +1,9 @@
 package Aufgabe7;
 
-public class Testklasse {
-	
+public class Testklasse 
+{
+	public static void main(String[] args) 
+    { 
 	final int NR_OF_STUDENTS = 5;
     Slack slack = new Slack();
 
@@ -34,6 +36,6 @@ public class Testklasse {
     students[3].setPublisher(slack);
     System.out.println();
     slack.publishNews();
+    }
 }
 
-}
