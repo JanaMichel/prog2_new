@@ -55,8 +55,8 @@ public class GUIUebung extends JFrame
 	        links.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 50));
 	        JLabel text2 = new JLabel("Weiterer Text");
 	        links.add(text2);
-	        JTextField input = new JTextField("Feld",10);
-	        links.add(input);       
+	        // JTextField input = new JTextField("Feld",10);
+	        //links.add(input);       
 	        links.setBackground(Color.LIGHT_GRAY);
 
 

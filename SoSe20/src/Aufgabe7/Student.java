@@ -23,9 +23,8 @@ public class Student implements Listener
 	@Override
 	public void setPublisher(Publisher publisher) 
 	{
-		Listener s = new Student(this.name);
-		publisher.register(s);
-		if(publisher.register(s)==true)
+		publisher = this.publisher;
+		if(publisher.register(this))
 		{
 			System.out.println(this.name + "registered");
 		}
@@ -34,9 +33,8 @@ public class Student implements Listener
 	@Override
 	public void removePublisher(Publisher publisher) 
 	{
-		Listener s = new Student(this.name);
-		publisher.unregister(s);
-		if(publisher.unregister(s)==true)
+		publisher = this.publisher;
+		if(publisher.unregister(this))
 		{
 			System.out.println(this.name + "unregistered");
 		}
