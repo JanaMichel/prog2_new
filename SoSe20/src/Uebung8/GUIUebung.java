@@ -71,8 +71,6 @@ public class GUIUebung extends JFrame
 	        mainPanel.add(rechts, BorderLayout.EAST);
 
 	        return mainPanel;
-	    
-
 	    }
 
 	    public static void main(String[] args) 

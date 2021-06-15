@@ -1,7 +1,15 @@
 package Uebung9;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.*;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.*;
 
@@ -9,136 +17,105 @@ import javax.swing.*;
 
 public class Uebung9 extends JFrame implements ActionListener
 {
-
-	//Objektvariablen: 
-    //1. Textfeld, zwei Buttons (add und remove)
-	JTextField input;
-	JButton add;
-	JButton remove;
-    //2. unteres Panel
-	JPanel unten;	
-    //4. Liste mit Labeln
-	List <JLabel> l1;
+	//Objektvariablen hier erstellen, damit die für alle Methoden verfügbar sind, also in der initContent(), auch ActionEvent()
+    JTextField textfeld;
+    JButton b1;
+    JButton b2;
+    List<JLabel> labels = new ArrayList<>(); //Collection, Liste voll mit labels
+    JPanel unten;
 
     public Uebung9()
     {       
-        super("Element hinzufügen");
-        //Verhalten beim Schließen
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Größe         
-        this.setSize(500, 200);
-        //Sichtbarkeit     
-       
-        //...
+    	super();
+        this.setTitle("Elemente hinzufügen");
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //2. main-JPanel in JPanels unten und oben unterteilen
-        
-    	JPanel oben = new JPanel();
-        //oben: Hintergrundfarbe ist YELLOW
-    	oben.setBackground(Color.YELLOW);
-    	this.getContentPane().add(oben, BorderLayout.NORTH); 
-    	//getContentPane (Hauptfenster) ist das gleiche 
-    	//wie JPanel mainPanel, mainPanel.add(oben, ..)
-    	this.unten = new JPanel();
-    	//unten: Hintergrundfarbe ist CYAN
-    	unten.setBackground(Color.CYAN);
-    	this.getContentPane().add(unten, BorderLayout.CENTER);
-    	
-    	//Dem Panel oben werden das Textfeld und die beiden Buttons hinzugefügt,
-    	this.input = new JTextField(10);
-    	this.add = new JButton("add");
-    	this.remove = new JButton("remove");
-    	oben.add(input);
-    	oben.add(add);
-    	oben.add(remove);
-        //das lagern wir in die Methode createOben() aus
-    	remove.addActionListener(ActionListener(this));
-    	add.addActionListener(ActionListener(this));
-        //Das Panel unten soll ebenfalls eine Objektvariable sein.
+        //Steuerelemente : Buttons, Label, ...
+        //Container: JPanel
 
-        //4. neue ArrayList für die Label anlegen 
-    	this.l1 = new ArrayList<>();
-    	
-    	this.setVisible(true);
+        JPanel panel = this.initContent();
+        this.getContentPane().add(panel); //Steuerelemente dem Container hinzufügen
+
+        this.setSize(400, 100);
+        this.setLocation(200, 300);     
+        this.setVisible(true);
+
+
+    }
+    public JPanel initContent()
+    {
+        JPanel main = new JPanel();
+        main.setLayout(new GridLayout(2,1));
+
+
+        //Bei grid + flowLayout spielt die Reihenfolge eine Rolle!
+        JPanel oben = new JPanel();
+        this.textfeld = new JTextField(10);
+        this.b1 = new JButton("add");
+        this.b1.setActionCommand("add"); //doppelmoppel, aber falls Text kryptisch, dann wird setAytionCommans benutzt!!
+        this.b2 = new JButton("remove");
+        oben.setBackground(Color.YELLOW);
+        oben.add(this.textfeld);
+        oben.add(this.b1);
+        oben.add(this.b2);
+        this.b1.addActionListener(this);
+        this.b2.addActionListener(this);
+        main.add(oben);
+
+
+        this.unten = new JPanel();
+        unten.setBackground(Color.CYAN);
+
+        main.add(unten);
+        return main;
     }
 
-    private ActionListener ActionListener(Uebung9 uebung9) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-/*	private JPanel createOben()
-    {
-        //
-
-        return panel;
-    }*/
-
-
     @Override
-    public void actionPerformed(ActionEvent e) 
+    public void actionPerformed(ActionEvent e) //HINZUFÜGEN ZUM PANEL!!!!
     {
-    	Object quelle = e.getSource();
-        //Quelle des Events ermitteln
-    	if(quelle instanceof JButton)
-    	{
-    		JButton button = (JButton)quelle; //konvertieren von Objekt zu JButton
-			if(button.equals(this.add))  //Falls es der "add"-Button ist
-			{
-				String inputText = this.input.getText(); // - Text aus dem Textfeld übernehmen
-		    	JLabel text = new JLabel(inputText);     // - neues Label mit dem Text anlegen
-		    	text.setOpaque(true);//setOpaque(true) aufrufen. Nur dadurch werden für dieses JLabel alle Pixel 
-		        //   gezeichnet, die in dessen Grenzen sind,
-		    	text.setBackground(Color.RED);     // - das Label formatieren (Hintergrundfarbe RED)
-		    	this.l1.add(text);    // - das Label in Label-Liste einfügen 
-		    	this.unten.add(text);      // - das Label dem unten Panel hinzufügen
-			}
-			else if(button.equals(this.remove))  //Falls es der "remove"-Button ist
-			{
-				Iterator<JLabel> it = l1.iterator();
-				
-				while(it.hasNext())
-		        { 
-					JLabel aktuellLabel = it.next();
-					String inputText = this.input.getText(); // - Text aus dem Textfeld übernehmen
-					if(aktuellLabel.getText().equals(inputText))
-		            {
-						
-						 // das Label muss sowohl aus der Liste als auch 
-						it.remove();
-						// 	aus dem Panel entfernt werden 
-		            	this.unten.remove(aktuellLabel);
-		            }
-		        } 
-			}
-			
-			 //Text im Textfeld löschen     
-			this.input.setText("");
-			this.input.requestFocus();
-			this.input.revalidate(); 
-			this.input.repaint();
-    	}
-       
-       
-    
-        //   Tipp: wenn Sie einem JLabel eine Hintergrundfarbe mit setBackground(Color c) 
-        //   setzen, dann sieht man diese nur, wenn Sie für dieses JLabel die Methode 
-        //    d.h. das komplette Rechteck, 
-        //   das das JLabel ausfüllt. Ansonsten würde nur der Text "gezeichnet" und 
-        //   die Hintergrundfarbe wäre hinter dem Text versteckt.
-     
-   
+        //System.out.println("Test.."); IMMER TESTEN ZUERST!!!!
+        Object quelle = e.getSource();
+        if(quelle instanceof JButton) //Ist es ein JBUTTON?
+        {
+            JButton button = (JButton)quelle; //überprüfen, ob JButton und was für ein Button geklickt wird
+            if(button.getActionCommand().equals("add"))
+            {   
+                JLabel neu = new JLabel(this.textfeld.getText());
+                neu.setOpaque(true);
+                neu.setBackground(Color.RED);
+                neu.setForeground(Color.WHITE);
+                this.labels.add(neu); //Liste hinzugefügt
+                //Textfeld auslesen, dannJLabel erzeugen -> Liste hinzufügen
+                //Textfeld mit "Hallo" befüülen, dann add-Button -> Ausgabe erscheint
 
-       
-        // - Text aus dem Textfeld übernehmen
-       
-        //   Tipp: Iterator nehmen
-        //   
-       
+                this.unten.add(neu);//JPanel hinzugefügt
 
-        
-        //weitere nötige Schritte requestFocus(),
+            System.out.println(this.textfeld.getText()); //Text aus Textfeld erscheint auf konsole
 
+                System.out.println("Add - Button geklickt..."); //Ist es ein add-Button?
+            }
+            else if(button.getActionCommand().equals("remove"))
+            {
+                String inputText = this.textfeld.getText(); //Text aus Textfeld wird zwischen gespeichert
+
+
+                  Iterator<JLabel> it = this.labels.iterator(); //laufen durch Liste
+                  while(it.hasNext()) //Element in der Liste?
+                      { JLabel aktLabel = it.next(); //wir holen das ELement aus der Liste, wir betrachten es
+
+                  if(aktLabel.getText().equals(inputText)) //Was für einen text in diesem label? + vergleichen den Text mit dem Text im Textfeld
+
+                     {
+                      it.remove(); //wenn gleich/schon vorhanden, dann löschen
+                      this.unten.remove(aktLabel);//wird auch ausJPanel gelöscht
+                     }
+             }
+
+                System.out.println("Remove - Button geklickt..");//ist es ein remove Button?
+            }
+            this.unten.revalidate(); //zeichnet Fenster nochmal neu
+            this.unten.repaint();
+        }
     }
 
     public static void main(String[] args) 
