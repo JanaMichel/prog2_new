@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Ergebnisbehandlung extends JFrame implements ActionListener
+public class Ergebnisbehandlung extends JFrame
 {
 	/*
 	 * GUIS
@@ -47,8 +47,37 @@ public class Ergebnisbehandlung extends JFrame implements ActionListener
 		oben.add(plus);
 		
 		//button anmelden
-		plus.addActionListener(this);
-		minus.addActionListener(this);
+		plus.addActionListener(new ActionListener() //wir haben kein ActionListener in der Hauptklasse implementiert , 
+													// können sie aber als anonyme Klasse ohne Namen implementieren mit 
+													// { "enter" } + implement methoden
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) //diese actionPerformed methode ist NUR für den Plus button
+			{
+				// TODO Auto-generated method stub
+				Ergebnisbehandlung.this.anzahlKlicks++; //Klicks werden erhöht von dem Button plus
+				Ergebnisbehandlung.this.unten.setText(Ergebnisbehandlung.this.anzahlKlicks.toString()); 
+				//wenn button plus button geklickt, dann wird
+				//das Label "unten" mit der aktuellen Anzahl der Klicks gefüllt
+				System.out.println("Plus button geklickt... " + Ergebnisbehandlung.this.anzahlKlicks);
+			}
+			
+		});
+		
+		minus.addActionListener(new ActionListener() 
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				Ergebnisbehandlung.this.anzahlKlicks--;
+				Ergebnisbehandlung.this.unten.setText(Ergebnisbehandlung.this.anzahlKlicks.toString());
+				System.out.println("Minus button geklickt... " + Ergebnisbehandlung.this.anzahlKlicks);
+			}
+			
+		});
+		
+		
 		
 		/*
 		 * wenn wir auf ereignisse reagieren wollen
@@ -73,32 +102,40 @@ public class Ergebnisbehandlung extends JFrame implements ActionListener
 		return mainPanel;
 	}
 	
-	public static void main(String[] args) {
-		new Ergebnisbehandlung();
-	}
-
-	//Methode die benutzt wird, um ein Ereignis auszuführen
-	@Override
-	public void actionPerformed(ActionEvent e) 
+	/*
+	public class ActionHandler implements ActionListener
 	{
-		//Als allererstes eine Ausgabe machen um zu schauen ob es funktioniert
-		Object quelle = e.getSource(); //hat ActionEvent ausgeloest
-		if(quelle instanceof JButton)
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
 		{
-			JButton button = (JButton)quelle; //konvertieren von Objekt zu JButton
-			if(button.getText().equals("-"))
+			Object quelle = e.getSource(); //hat ActionEvent ausgeloest
+			if(quelle instanceof JButton)
 			{
-				this.anzahlKlicks--;
-				System.out.println("Minus Button geklickt ..." + this.anzahlKlicks);
+				JButton button = (JButton)quelle; //konvertieren von Objekt zu JButton
+				if(button.getText().equals("-"))
+				{
+					Ergebnisbehandlung.this.anzahlKlicks--; 
+					//da man mit this. auf eine variable der inneren Klasse
+					//zugreift muss in der inneren Klasse der name der Hauptklasse vor dem this. geschrieben werden
+					//um Java mitzuteilen das wir die variable der äußeren Klasse meinen
+					System.out.println("Minus Button geklickt ..." + Ergebnisbehandlung.this.anzahlKlicks);
+				}
+				else if(button.getText().equals("+"))
+				{
+					Ergebnisbehandlung.this.anzahlKlicks++;
+					System.out.println("Plus Button geklickt ..." + Ergebnisbehandlung.this.anzahlKlicks);
+				}
+				Ergebnisbehandlung.this.unten.setText(Ergebnisbehandlung.this.anzahlKlicks.toString());
 			}
-			else if(button.getText().equals("+"))
-			{
-				this.anzahlKlicks++;
-				System.out.println("Plus Button geklickt ..." + this.anzahlKlicks);
-			}
-			this.unten.setText(this.anzahlKlicks.toString());
+			
 		}
 		
+	}*/
+
+	
+	public static void main(String[] args) {
+		new Ergebnisbehandlung();
 	}
 	
 }

@@ -2,6 +2,11 @@ package Aufgabe7;
 
 public class Testklasse 
 {
+	/*
+	 * insgesamt nur 2 Fehler, das war die vertauschung von this.publisher = publisher
+	 * sonst richtige Lösung
+	 */
+	
 	public static void main(String[] args) 
     { 
 	final int NR_OF_STUDENTS = 5;

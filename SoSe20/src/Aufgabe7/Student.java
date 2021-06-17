@@ -1,6 +1,5 @@
 package Aufgabe7;
 
-import Uebung7.Stadt;
 
 public class Student implements Listener
 {
@@ -16,27 +15,27 @@ public class Student implements Listener
 	@Override
 	public void update() 
 	{
-		Listener s = new Student(this.name);
-		this.publisher.getUpdate(s);
+		String msg = this.publisher.getUpdate(this); //ursprünglich Listener a1 = new Student(this.name)
+		System.out.println(this.name + " received " + msg); //this.publisher.getUpdate(a1)
 	}
 
 	@Override
 	public void setPublisher(Publisher publisher) 
 	{
-		publisher = this.publisher;
-		if(publisher.register(this))
+		this.publisher = publisher; //Ursprünglich publisher = this.publisher
+		if(this.publisher.register(this)) //grund für nullpointer exception
 		{
-			System.out.println(this.name + "registered");
+			System.out.println(this.name + " registered");
 		}
 	}
 
 	@Override
 	public void removePublisher(Publisher publisher) 
 	{
-		publisher = this.publisher;
-		if(publisher.unregister(this))
+		this.publisher = publisher;
+		if(this.publisher.unregister(this))
 		{
-			System.out.println(this.name + "unregistered");
+			System.out.println(this.name + " deregistered");
 		}
 	}
 	

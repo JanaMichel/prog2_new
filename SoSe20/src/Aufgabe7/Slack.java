@@ -24,6 +24,10 @@ public class Slack implements Publisher
 		}
 		this.listeners.add(listener);
 		return true;
+		/*
+		 * einfacher gewesen wäre:
+		 * return listeners.add(listener);     
+		 */
 	}
 
 	@Override
@@ -35,13 +39,16 @@ public class Slack implements Publisher
 			return true;
 		}
 		return false;
-
+		/*
+		 * einfacher gewesen wäre:
+		 * return listeners.remove(listener);     
+		 */
 	}
 
 	@Override
 	public void notifyListeners() 
 	{
-		for(Listener listens : this.listeners)
+		for(Listener listens : this.listeners) //in Lösung wurde hier this. weggelassen
 		{
 			listens.update();
 		}
@@ -56,7 +63,7 @@ public class Slack implements Publisher
 	public void publishNews()
 	{
 		this.nrOfMessages++;
-		notifyListeners();
+		this.notifyListeners();
 	}
 	
 }
