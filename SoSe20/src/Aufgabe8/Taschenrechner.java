@@ -9,7 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /*
- * erst muss eine Summe dem ergebnis (durch plus) hinzugefügt werden, sonst rechnet er mit null weiter
+ * die Standardsumme ist bei 1. Somit ist bei der eingabe 1+ die summe = 2
+ * alternativlösung: die summe ist standardmäßig =0, aber dann muss erst eine andere summe mit plus hinzugefügt werden
  */
 
 
