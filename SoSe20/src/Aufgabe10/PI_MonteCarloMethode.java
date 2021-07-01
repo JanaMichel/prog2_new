@@ -39,11 +39,7 @@ public class PI_MonteCarloMethode extends JFrame
 			int breite = this.getWidth()- 2 * abstand;
 			g2.setStroke(new BasicStroke(4.0f)); //Linienstärke 5.0f 
 			
-			Random r = new Random(); //ein kleiner zusatz weil es schöner ist
-			int rot = r.nextInt(256);
-			int gruen = r.nextInt(256);
-			int blau = r.nextInt(256);
-			Color c = new Color(rot, gruen, blau);
+			Color c = new Color(200, 10, 100); 
 			g2.setColor(c);
 			
 			int abstandlinks = (this.getWidth() - hoehe)/2;
@@ -51,15 +47,18 @@ public class PI_MonteCarloMethode extends JFrame
 			g2.drawArc(abstandlinks, abstand, hoehe*2, hoehe*2, 180, -90);
 			
 			//kleine weitere kreise
-			Graphics2D g3 = (Graphics2D)g; //Wenn wir zeichnen wollen IMMER implementieren
 			Random b = new Random();
-			int xRandom = b.nextInt(hoehe)+abstandlinks;
-			int yRandom = b.nextInt(hoehe)+abstandlinks+abstand;
-			g3.setColor(new Color(30, 30, 30));
-			for(int i = 0; i<100; i++)
+			
+			g2.setColor(new Color(30, 30, 30));
+			
+			for (int i = 0; i < 100; i++) 
 			{
-				g3.drawOval(xRandom, yRandom, 2, 2);
+				int xRandom = b.nextInt(hoehe)+abstandlinks;
+				int yRandom = b.nextInt(hoehe)+abstandlinks+abstand;
+				g2.fillOval(xRandom, yRandom, 2, 2);
+				
 			}
+			
 		}
 	}
 
